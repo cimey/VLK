@@ -1,4 +1,3 @@
-# VLK-API
 # VLK Stock Management System
 
 This project is a full-stack stock management system built with .NET 8, featuring a RESTful API, a web-based UI, and a SQL Server database. The solution is containerized using Docker for easy deployment and development.
