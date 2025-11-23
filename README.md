@@ -82,6 +82,8 @@ Go to solution folder
 
 - Update connection strings and environment variables in `docker-compose.yml` and `API/appsettings.json` as needed.
 - Database migrations are managed via Entity Framework Core.
+- Apllication runs migration and creates one client and three stocks.
+- UI contains 2 routes /users and /trade
 
 ## Testing
 
