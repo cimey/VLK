@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+  api:
+    image: cumakilinc/vlk-api:latest
+    container_name: vlk-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__Default: "Server=sqlserver;Database=VLKStock;User Id=sa;Password=Your_password123;TrustServerCertificate=True"
+    ports:
+      - "5119:8080"
+    depends_on:
+      - sqlserver
+
+  ui:
+    image: cumakilinc/vlk-ui:latest
+    container_name: vlk-ui
+    environment:
+      API_BASE_URL: "http://api:8080"   # Internal Docker network URL
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+
+volumes:
+  sqlserver-data:
